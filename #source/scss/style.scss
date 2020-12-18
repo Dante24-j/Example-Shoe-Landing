@@ -1,0 +1,318 @@
+//<МИКСИНЫ>==============================================================================================
+@import 'mixins.scss';
+//</МИКСИНЫ>=============================================================================================
+
+//<ШРИФТЫ>===============================================================================================
+@import 'font.scss';
+//</ШРИФТЫ>==============================================================================================
+
+//<ЦВЕТА>================================================================================================
+@import 'color.scss';
+//</ЦВЕТА>===============================================================================================
+
+//<ПЕРЕМЕННЫЕ>===========================================================================================
+$minwidth:320px;
+$mw:1366;
+$pp:12; //!(ВНЕСТИ В СТАРТОВЫЙ ШАБЛОН)отступ чтобы не билось об края экрана
+$md1:$mw+$pp; //!(ВНЕСТИ В СТАРТОВЫЙ ШАБЛОН)
+$md2:992.98;
+$md3:767.98;
+$md4:479.98;
+//</ПЕРЕМЕННЫЕ>==========================================================================================
+
+//<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===========================================================================
+@import 'null.scss';
+//</ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>======================================================================================
+
+//<ОБОЛОЧКА>=========================================================================================================
+.wrapper{width: 100%;min-height: 100%;overflow: hidden;
+	&.loaded{}
+}
+//</ОБОЛОЧКА>========================================================================================================
+
+//<ОСНОВНАЯ СЕТКА>===================================================================================================
+.container{max-width:$mw+px;margin: 0 auto;width: 100%;
+	@media (max-width:$md1+px){max-width: 970px;}
+	@media (max-width:$md2+px){max-width: 750px;}
+	@media (max-width:$md3+px){max-width: none;padding:0 10px;}
+}
+
+.container2{ //!
+	max-width:$mw+px;
+	margin: 0 auto;
+	width: 100%;
+}
+//</ОСНОВНАЯ СЕТКА>==================================================================================================
+
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>====================================================================
+@import "baguetteBox.scss";
+@import "popover.min.scss";
+@import "popup.scss";
+@import "header.scss";
+@import "footer.scss";
+//</ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>===================================================================
+
+//<ОСНОВНОЙ БЛОК>====================================================================================================
+
+//===================================================================================================================
+.body-sector {
+
+	&__wrapper{
+		padding: 304px 0px 337px 0px;
+
+		@media (min-width:$md3+px){
+			max-width: 440px;
+			margin: 0px 0px 0px auto;
+		}
+	}
+
+	// .body-sector__title
+
+	&__title {
+		font-family: Roboto;
+		font-size: 40px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.25;
+		letter-spacing: normal;
+		text-align: left;
+		color: #00fffc;
+		margin: 0px 0px 105px 0px;
+		max-width: 410px;
+	}
+
+	// .body-sector__link
+
+	&__link {
+		
+	}
+}
+.link {
+	@include flexbox();
+	justify-content:space-between;
+	// .link__defolt
+
+	&__defolt {
+		@include flexbox();
+		justify-content:center;
+		align-items: center;
+		font-family: Roboto;
+		font-size: 14px;
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 3.21;
+		letter-spacing: normal;
+		text-align: center;
+		color: $white-three;
+
+		width: 200px;
+		height: 50px;
+		border-radius: 25px;
+		box-shadow: 0px 10px 30px 0 rgba(20, 108, 113, 0.15);
+		background-color: #00ecf4;
+
+		&:hover{
+			box-shadow: 0px 10px 30px 0 rgba(20, 108, 113, 0.15);
+			border: solid 2px $white-three;
+			background-color: rgba(20, 108, 113, 0.15);
+			@include anim(0.3s,0s);
+		}
+		// .link__defolt_color
+
+		&_color {
+		}
+	}
+}
+$content: 41.14%;			//размер контента в %
+$content_a: 0.4114;		//размер контента в числовом виде
+$image: 58.86%;				//размер картинки в %
+$image_a: 0.5886;			//размер картинки в числовом виде
+$pp_image: 0%;			//подгон высоты картинки
+
+.circles{
+
+	&__object{
+		width: 22px;
+		height: 22px;
+		position: absolute;
+		border-radius: 50%;
+		animation:scale-up-centerq 10s ease infinite both;
+
+		@keyframes scale-up-centerq {
+			0% {
+				border: solid 6px #00fffc;
+				transform: scale(1);
+			}
+			100% {
+				transform: scale(5);
+				border: solid 0.8px #00fffc;
+			}
+		}
+	}
+}
+
+.section {
+	position: relative;
+	@media (min-width:$md3+px){
+		display: flex;
+	}
+
+	&__circles{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__content {
+		flex: 0 0 100%;
+	}
+
+	&__container {
+		max-width: $md1+px;
+		margin: 0 auto;
+		padding: 0px $pp/2+px;
+	}
+
+	&__body {
+		@media (min-width:$md3+px){
+			width: $content;
+		}
+	}
+
+	&__image {
+
+		@media (min-width:$md3+px){
+			position: relative;
+    	flex: 0 0 calc(((100vw - #{$pp+px}) * #{$image_a}) + #{$pp/2+px});
+    	padding: 0 0 $pp_image 0;
+			transform: translate(-100%, 0px);
+			
+			.fuut{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				max-width: 100%;
+
+				img{
+					max-width: 100%;
+				}
+			}
+		}
+		@media (min-width:$md1+px){
+    flex: 0 0 calc(50vw - (#{$content_a - 0.5}) * (#{$md1+px} - #{$pp+px}));
+		}
+
+		.image{
+			max-width: 100%; 
+			-webkit-animation: heartbeat 60s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite both;
+			animation: heartbeat 60s cubic-bezier(0.175, 0.885, 0.320, 1.275) infinite both;
+			@-webkit-keyframes heartbeat {
+				from {
+					-webkit-transform: scale(1);
+									transform: scale(1);
+					-webkit-transform-origin: center center;
+									transform-origin: center center;
+					-webkit-animation-timing-function: ease-out;
+									animation-timing-function: ease-out;
+				}
+				10% {
+					-webkit-transform: scale(0.91);
+									transform: scale(0.91);
+					-webkit-animation-timing-function: ease-in;
+									animation-timing-function: ease-in;
+				}
+				17% {
+					-webkit-transform: scale(0.98);
+									transform: scale(0.98);
+					-webkit-animation-timing-function: ease-out;
+									animation-timing-function: ease-out;
+				}
+				33% {
+					-webkit-transform: scale(0.87);
+									transform: scale(0.87);
+					-webkit-animation-timing-function: ease-in;
+									animation-timing-function: ease-in;
+				}
+				45% {
+					-webkit-transform: scale(1);
+									transform: scale(1);
+					-webkit-animation-timing-function: ease-out;
+									animation-timing-function: ease-out;
+				}
+			}
+			@keyframes heartbeat {
+				from {
+					-webkit-transform: scale(1);
+									transform: scale(1);
+					-webkit-transform-origin: center center;
+									transform-origin: center center;
+					-webkit-animation-timing-function: ease-out;
+									animation-timing-function: ease-out;
+				}
+				10% {
+					-webkit-transform: scale(0.91);
+									transform: scale(0.91);
+					-webkit-animation-timing-function: ease-in;
+									animation-timing-function: ease-in;
+				}
+				17% {
+					-webkit-transform: scale(0.98);
+									transform: scale(0.98);
+					-webkit-animation-timing-function: ease-out;
+									animation-timing-function: ease-out;
+				}
+				33% {
+					-webkit-transform: scale(0.87);
+									transform: scale(0.87);
+					-webkit-animation-timing-function: ease-in;
+									animation-timing-function: ease-in;
+				}
+				45% {
+					-webkit-transform: scale(1);
+									transform: scale(1);
+					-webkit-animation-timing-function: ease-out;
+									animation-timing-function: ease-out;
+				}
+			}
+			
+
+			@media (min-width:$md3+px){
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				object-fit: cover;
+			}
+		}
+	}
+}
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//</ОСНОВНОЙ БЛОК>===================================================================================================
+
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>=============================================================
+@import "forms.scss";
+@import "ui.scss";
+//</ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>============================================================
